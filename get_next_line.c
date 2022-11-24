@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:45:25 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/24 14:47:05 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:54:57 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ char	*get_next_line(int fd)
 {
 	static char	buff[BUFFER_SIZE + 1];
 	char		*line;
-	ssize_t		len;
 
-	if (fd == -1)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
-	line = malloc(sizeof(char));
-	line[0] = '\0';
-	while ((len = read(fd, buff, BUFFER_SIZE)))
-		line = ft_strjoin(line, buff);
+	line = ft_read_to_n(fd, buff);
+	line = ft_get_line_to_n(buff, line);
+	ft_get_after_n(buff);
 	return (line);
 }
 
@@ -31,8 +29,10 @@ char	*get_next_line(int fd)
 #include <fcntl.h>
 int main()
 {
-	int	fd;
+	int		fd;
+	char	*str;
 
 	fd = open("ayo.txt", O_RDONLY);
-	printf("%s\n", get_next_line(fd));
+	while (str = get_next_line(fd))
+		printf("%s\n", str);
 }

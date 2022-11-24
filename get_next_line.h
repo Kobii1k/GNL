@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:42:07 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/24 13:41:24 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/11/24 17:57:27 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,11 @@
 # include <unistd.h>
 
 char	*get_next_line(int fd);
+char	*ft_read_to_n(int fd, char *buff);
+char	*ft_get_line_to_n(char *buff, char *line);
+void	ft_get_after_n(char *buff);
+
+size_t	ft_strlen(const char *s)
 char	*ft_strjoin(char const *s1, char const *s2);
 
 #endif
