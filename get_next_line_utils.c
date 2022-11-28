@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:42:03 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/24 13:44:16 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/11/27 19:37:03 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char const *s1, char const *s2, int len_s2)
 {
 	char	*str;
 	int		i;
@@ -31,8 +31,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	if (s1 && s2)
 	{
-		i = ft_strlen(s1) + ft_strlen(s2) + 1;
-		str = malloc(i * sizeof(char));
+		str = malloc((ft_strlen(s1) + len_s2 + 1) * sizeof(char));
 		if (!str)
 			return (NULL);
 		i = 0;
