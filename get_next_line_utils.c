@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:42:03 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/27 19:37:03 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/11/28 18:22:58 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2, int len_s2)
+char	*ft_strjoin(char *s1, char *s2, int len_s2)
 {
 	char	*str;
 	int		i;
@@ -45,4 +45,31 @@ char	*ft_strjoin(char const *s1, char const *s2, int len_s2)
 		return (str);
 	}
 	return (NULL);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*pointer;
+
+	pointer = s;
+	while (n)
+	{
+		*pointer = 0;
+		pointer++;
+		n--;
+	}
+}
+
+int	ft_is_nl(char *buff)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i])
+	{
+		if (buff[i] == '\n')
+			return (i);
+		i++;
+	}
+	return (-1);
 }
