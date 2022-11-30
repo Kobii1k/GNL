@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:45:25 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/28 18:46:47 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/11/30 15:53:00 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,19 +45,22 @@ char	*ft_cleanup_line(char *line)
 		j = 0;
 		tmp = malloc(sizeof(char) * (i + 2));
 		if (!tmp)
-			return (NULL);
+			return (free(line), NULL);
 		while (j <= i)
 		{
 			tmp[j] = line[j];
 			j++;
 		}
-		return (free(line), tmp);
+		tmp[j] = '\0';
+		free(line);
+		return (tmp);
 	}
 }
 
 char	*ft_read_nl(int fd, char *buff, char *line)
 {
 	int		len;
+	char	*tmp;
 
 	len = 1;
 	while (len != 0 && ft_is_nl(buff) == -1)
@@ -66,12 +69,16 @@ char	*ft_read_nl(int fd, char *buff, char *line)
 		if (len == -1)
 		{
 			ft_bzero(buff, BUFFER_SIZE);
-			return (free(line), NULL);
-		}
-		buff[len] = '\0';
-		line = ft_strjoin(line, buff, len);
-		if (!line)
 			return (NULL);
+		}
+		if (len == 0)
+			return (NULL);
+		buff[len] = '\0';
+		tmp = ft_strjoin(line, buff, len);
+		free(line);
+		if (!tmp)
+			return (NULL);
+		return (tmp);
 	}
 	return (line);
 }
@@ -80,25 +87,24 @@ char	*ft_read(int fd, char *buff)
 {
 	char	*line;
 	char	*tmp;
-	char	*t;
 
-	line = malloc(sizeof(char));
-	if (!line)
+	line = NULL;
+	tmp = malloc(sizeof(char));
+	if (!tmp)
 		return (NULL);
-	line[0] = '\0';
+	tmp[0] = '\0';
 	if (buff)
 	{
-		tmp = ft_strjoin(line, buff, ft_strlen(buff));
-		if (!tmp)
-			return (NULL);
-		line = tmp;
+		line = ft_strjoin(tmp, buff, ft_strlen(buff));
 		free(tmp);
+		if (!line)
+			return (NULL);
 	}
-	t = ft_read_nl(fd, buff, line);
-	if (!t)
-		return (NULL);
-	line = t;
-	return (free(line), t);
+	tmp = ft_read_nl(fd, buff, line);
+	if (!tmp)
+		return (free(line), NULL);
+	line = tmp;
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -107,7 +113,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*tmp;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	line = ft_read(fd, buff);
 	if (!line || !line[0])
