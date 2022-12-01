@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:42:07 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/28 18:22:40 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/12/01 18:16:40 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_cleanup_buffer(char *buff);
 
 size_t	ft_strlen(const char *s);
 char	*ft_strjoin(char *s1, char *s2, int len_s2);
+char	*ft_strjoin_free(char *s1, char *s2, int len_s2);
 void	ft_bzero(void *s, size_t n);
 
 #endif

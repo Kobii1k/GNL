@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:42:03 by mgagne            #+#    #+#             */
-/*   Updated: 2022/11/30 15:20:47 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/12/01 19:00:12 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,17 @@ char	*ft_strjoin(char *s1, char *s2, int len_s2)
 		return (str);
 	}
 	return (NULL);
+}
+
+char	*ft_strjoin_free(char *s1, char *s2, int len_s2)
+{
+	char	*new;
+
+	new = ft_strjoin(s1, s2, len_s2);
+	if (!new)
+		return (NULL);
+	free(s1);
+	return (new);
 }
 
 void	ft_bzero(void *s, size_t n)
