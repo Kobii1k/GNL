@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:45:25 by mgagne            #+#    #+#             */
-/*   Updated: 2022/12/01 19:00:00 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/12/02 11:45:42 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ void	ft_cleanup_buffer(char *buff)
 	int	i;
 
 	j = 0;
-	i = 0;
-	while (buff[j] != '\n')
+	while (buff[j] && buff[j] != '\n')
 		j++;
-	while (++j <= BUFFER_SIZE)
-	{
-		buff[i] = buff[j];
-		i++;
-	}
+	if (!buff[j])
+		return ;
+	j++;
+	i = 0;
+	while (buff[j])
+		buff[i++] = buff[j++];
 	buff[i] = '\0';
 }
 
