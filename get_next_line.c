@@ -6,7 +6,7 @@
 /*   By: mgagne <mgagne@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 16:45:25 by mgagne            #+#    #+#             */
-/*   Updated: 2022/12/02 11:45:42 by mgagne           ###   ########.fr       */
+/*   Updated: 2022/12/05 15:53:58 by mgagne           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,15 +62,15 @@ char	*ft_read_nl(int fd, char *buff, char *line)
 	int		len;
 
 	len = 1;
-	while (len != 0 && ft_is_nl(buff) == -1)
+	while (len > 0 && ft_is_nl(buff) == -1)
 	{
 		len = read(fd, buff, BUFFER_SIZE);
-		buff[len] = '\0';
 		if (len == -1)
 		{
 			ft_bzero(buff, BUFFER_SIZE);
-			return (NULL);
+			return (free(line), NULL);
 		}
+		buff[len] = '\0';
 		if (len == 0 && line[0] == '\0')
 			return (free(line), NULL);
 		line = ft_strjoin_free(line, buff, len);
@@ -106,7 +106,7 @@ char	*get_next_line(int fd)
 	char		*line;
 
 	buff[BUFFER_SIZE] = '\0';
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	line = ft_read(fd, buff);
 	if (!line)
