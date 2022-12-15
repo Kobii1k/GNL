@@ -28,7 +28,7 @@ char	*ft_cleanup_line(char *line);
 void	ft_cleanup_buffer(char *buff);
 
 size_t	ft_strlen(const char *s);
-char	*ft_strjoin(char *s1, char *s2, int len_s2);
+char	*ft_strjoin_len(char *s1, char *s2, int len_s2);
 char	*ft_strjoin_free(char *s1, char *s2, int len_s2);
 void	ft_bzero(void *s, size_t n);
 

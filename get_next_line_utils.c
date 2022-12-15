@@ -23,7 +23,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char *s1, char *s2, int len_s2)
+char	*ft_strjoin_len(char *s1, char *s2, int len_s2)
 {
 	char	*str;
 	int		i;
@@ -51,7 +51,7 @@ char	*ft_strjoin_free(char *s1, char *s2, int len_s2)
 {
 	char	*new;
 
-	new = ft_strjoin(s1, s2, len_s2);
+	new = ft_strjoin_len(s1, s2, len_s2);
 	if (!new)
 		return (NULL);
 	free(s1);
